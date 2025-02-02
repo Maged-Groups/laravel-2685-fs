@@ -5,8 +5,8 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class PostStatus extends Model
+class ReactionType extends Model
 {
-    /** @use HasFactory<\Database\Factories\PostStatusFactory> */
+    /** @use HasFactory<\Database\Factories\ReactionTypeFactory> */
     use HasFactory;
 }

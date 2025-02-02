@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\ReactionType;
+use App\Http\Requests\StoreReactionTypeRequest;
+use App\Http\Requests\UpdateReactionTypeRequest;
 
 class ReactionTypeController extends Controller
 {
@@ -25,7 +27,7 @@ class ReactionTypeController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StoreReactionTypeRequest $request)
     {
         //
     }
@@ -33,7 +35,7 @@ class ReactionTypeController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(ReactionType $reactionType)
     {
         //
     }
@@ -41,7 +43,7 @@ class ReactionTypeController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(ReactionType $reactionType)
     {
         //
     }
@@ -49,7 +51,7 @@ class ReactionTypeController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateReactionTypeRequest $request, ReactionType $reactionType)
     {
         //
     }
@@ -57,7 +59,7 @@ class ReactionTypeController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(ReactionType $reactionType)
     {
         //
     }

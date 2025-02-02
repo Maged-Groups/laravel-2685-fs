@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Models\Post;
+use App\Http\Requests\StorePostRequest;
+use App\Http\Requests\UpdatePostRequest;
 
 class PostController extends Controller
 {
@@ -13,10 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        // $posts = Post::with('user')->with('postStatus')->get();
-        $posts = Post::with(['user', 'postStatus'])->get();
-
-        return $posts;
+        //
     }
 
     /**
@@ -30,7 +27,7 @@ class PostController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePostRequest $request)
     {
         //
     }
@@ -38,15 +35,15 @@ class PostController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Post $post)
     {
-        return $id;
+       return $post;
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Post $post)
     {
         //
     }
@@ -54,7 +51,7 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdatePostRequest $request, Post $post)
     {
         //
     }
@@ -62,18 +59,8 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Post $post)
     {
         //
-    }
-
-    public function new()
-    {
-        return 'All new posts without any comments';
-    }
-
-    public function today()
-    {
-        return 'All today\'s posts';
     }
 }

@@ -49,23 +49,21 @@ Route::resources(
 Route::get('init', function () {
 
 
-    $controllers = [
+    $models = [
         'Post',
         'Comment',
-        'Test',
         'PostReaction',
         'PostStatus',
         'Reaction',
         'ReactionType',
         'Reply',
         'User',
-        'Last'
     ];
 
 
-    foreach ($controllers as $controller) {
+    foreach ($models as $model) {
         // php artisan make:controller NameController -r
-        Artisan::call('make:controller', ['name' => "{$controller}Controller", '-r' => true]);
+        Artisan::call('make:model', ['name' => $model, '-a' => true]);
     }
 
 

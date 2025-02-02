@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Models\PostStatus;
+use App\Http\Requests\StorePostStatusRequest;
+use App\Http\Requests\UpdatePostStatusRequest;
 
 class PostStatusController extends Controller
 {
@@ -11,7 +13,7 @@ class PostStatusController extends Controller
      */
     public function index()
     {
-        //
+       return PostStatus::all();
     }
 
     /**
@@ -25,7 +27,7 @@ class PostStatusController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(StorePostStatusRequest $request)
     {
         //
     }
@@ -33,15 +35,15 @@ class PostStatusController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(PostStatus $postStatus)
     {
-        //
+        return $postStatus;
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(PostStatus $postStatus)
     {
         //
     }
@@ -49,7 +51,7 @@ class PostStatusController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(UpdatePostStatusRequest $request, PostStatus $postStatus)
     {
         //
     }
@@ -57,7 +59,7 @@ class PostStatusController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(PostStatus $postStatus)
     {
         //
     }

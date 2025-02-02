@@ -35,3 +35,18 @@ php artisan migrate:refresh
 # Drop all tables and re-run all migrations
 php artisan migrate:fresh
 
+# make model
+php artisan make:model Post
+
+# make model with controller
+php artisan make:model Post -c
+
+# make model with resource controller
+php artisan make:model Post -cr
+
+# make model with migration
+php artisan make:model Post -m
+
+# make model with all 7 basic classes
+php artisan make:model Post -a
+
