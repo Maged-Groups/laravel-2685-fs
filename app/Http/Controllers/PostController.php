@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Models\Post;
+
 class PostController extends Controller
 {
     /**
@@ -11,7 +13,10 @@ class PostController extends Controller
      */
     public function index()
     {
-        return 'All posts';
+        // $posts = Post::with('user')->with('postStatus')->get();
+        $posts = Post::with(['user', 'postStatus'])->get();
+
+        return $posts;
     }
 
     /**
@@ -62,11 +67,13 @@ class PostController extends Controller
         //
     }
 
-    public function new () {
+    public function new()
+    {
         return 'All new posts without any comments';
     }
 
-    public function today () {
+    public function today()
+    {
         return 'All today\'s posts';
     }
 }
