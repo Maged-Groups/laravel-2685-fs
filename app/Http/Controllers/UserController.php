@@ -13,7 +13,8 @@ class UserController extends Controller
      */
     public function index()
     {
-        //
+        return User::all()->random()->id;
+        return User::inRandomOrder()->first()->id;
     }
 
     /**

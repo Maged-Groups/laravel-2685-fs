@@ -9,4 +9,13 @@ class User extends Model
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory;
+
+
+    protected function casts()
+    {
+        return [
+            'password' => 'hashed'
+        ];
+    }
+
 }
