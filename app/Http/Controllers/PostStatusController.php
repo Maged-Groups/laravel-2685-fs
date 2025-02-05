@@ -13,7 +13,7 @@ class PostStatusController extends Controller
      */
     public function index()
     {
-       return PostStatus::all();
+        //
     }
 
     /**
@@ -37,7 +37,7 @@ class PostStatusController extends Controller
      */
     public function show(PostStatus $postStatus)
     {
-        return $postStatus;
+        //
     }
 
     /**
