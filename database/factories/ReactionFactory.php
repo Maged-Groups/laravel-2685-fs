@@ -2,6 +2,9 @@
 
 namespace Database\Factories;
 
+use App\Models\Post;
+use App\Models\ReactionType;
+use App\Models\User;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -17,7 +20,7 @@ class ReactionFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            //   See Seader
         ];
     }
 }

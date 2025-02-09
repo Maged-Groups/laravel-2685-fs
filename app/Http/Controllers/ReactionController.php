@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Reaction;
 use App\Http\Requests\StoreReactionRequest;
 use App\Http\Requests\UpdateReactionRequest;
+use App\Models\Post;
+use App\Models\ReactionType;
+use App\Models\User;
 
 class ReactionController extends Controller
 {

@@ -11,8 +11,18 @@ class UserSeeder extends Seeder
     /**
      * Run the database seeds.
      */
+
     public function run(): void
     {
+
+        User::factory()->create([
+            'name' => 'Maged Yaseen',
+            'email' => 'magedyaseengroups@gmail.com',
+            'mobile' => '01024750245',
+            'roles' => 'admin',
+            'password' => 'password',
+        ]);
+
         User::factory(100)->create();
     }
 }

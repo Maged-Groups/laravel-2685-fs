@@ -13,8 +13,7 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::all()->random()->id;
-        return User::inRandomOrder()->first()->id;
+        User::with('posts')->with('reactions')->get();
     }
 
     /**
@@ -38,7 +37,10 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        //
+        return $user;
+        // return $user->mobile;
+        return count($user->replies);
+        // return count($user->posts);
     }
 
     /**

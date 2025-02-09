@@ -26,29 +26,46 @@ Route::resources(
 );
 
 
-// Route::get('init', function () {
+Route::get('init', function () {
 
 
-//     $models = [
-//         'User',
-//         'PostStatus',
-//         'ReactionType',
-//         'Post',
-//         'Reaction',
-//         'Comment',
-//         'Reply',
-//     ];
+    // ////// Models
+    // $models = [
+    //     'User',
+    //     'PostStatus',
+    //     'ReactionType',
+    //     'Post',
+    //     'Reaction',
+    //     'Comment',
+    //     'Reply',
+    // ];
 
 
-//     foreach ($models as $model) {
-//         // php artisan make:controller NameController -r
-//         Artisan::call('make:model', ['name' => $model, '-a' => true]);
+    // foreach ($models as $model) {
+    //     // php artisan make:controller NameController -r
+    //     Artisan::call('make:model', ['name' => $model, '-a' => true]);
 
-//         sleep(1);
-//     }
-
-
+    //     sleep(1);
+    // }
 
 
-//     return 'DONE';
-// });
+    // ////// Seeders
+
+    // $seeders = [
+    //     'UserSeeder',
+    //     'PostStatusSeeder',
+    //     'ReactionTypeSeeder',
+    //     'PostSeeder',
+    //     'ReactionSeeder',
+    //     'CommentSeeder',
+    //     'ReplySeeder',
+    // ];
+
+    // Artisan::call('migrate:fresh');
+
+    // foreach ($seeders as $seeder) {
+
+    //     Artisan::call('db:seed', ['--class' => $seeder]);
+    // }
+    return 'DONE';
+});

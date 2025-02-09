@@ -1,4 +1,5 @@
 <?php
+ini_set('max_execution_time', 300000000);
 
 use Illuminate\Http\Request;
 
