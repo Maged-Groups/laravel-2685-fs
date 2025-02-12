@@ -29,7 +29,7 @@ class User extends Model
 
     public function posts(): HasMany
     {
-        return $this->hasMany(Post::class);
+        return $this->hasMany(Post::class); // INNER JOIN `posts` ON `user`.`id` = `posts`.`user_id`
     }
 
     public function comments(): HasMany

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
+use App\Http\Resources\UserResource;
 
 class UserController extends Controller
 {
@@ -13,7 +14,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        User::with('posts')->with('reactions')->get();
+        $users = User::get();
+
+        // return $users ;
+
+        return UserResource::collection($users);
     }
 
     /**
@@ -35,12 +40,16 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show($id)
     {
-        return $user;
-        // return $user->mobile;
-        return count($user->replies);
-        // return count($user->posts);
+
+        $user = User::with('posts')->where('id', $id)->first();
+
+        // return $user;
+
+        return UserResource::make($user);
+
+
     }
 
     /**

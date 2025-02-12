@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PostStatus;
 use App\Http\Requests\StorePostStatusRequest;
 use App\Http\Requests\UpdatePostStatusRequest;
+use App\Http\Resources\PostStatusResource;
 
 class PostStatusController extends Controller
 {
@@ -13,7 +14,9 @@ class PostStatusController extends Controller
      */
     public function index()
     {
-        //
+        $postStatuses = PostStatus::all();
+
+        return PostStatusResource::collection($postStatuses);
     }
 
     /**
@@ -37,7 +40,9 @@ class PostStatusController extends Controller
      */
     public function show(PostStatus $postStatus)
     {
-        //
+        // $postStatus = PostStatus::where('id', $postStatus->id)->first();
+
+        return PostStatusResource::make($postStatus);
     }
 
     /**

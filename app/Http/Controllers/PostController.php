@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Http\Resources\PostResource;
 
 class PostController extends Controller
 {
@@ -13,7 +14,12 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::get();
+
+        $ready_posts = PostResource::collection($posts);
+
+        return $ready_posts;
+
     }
 
     /**
@@ -37,7 +43,10 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+
+        $post = Post::where('id', $post->id)->first();
+
+        return PostResource::make($post);
     }
 
     /**
