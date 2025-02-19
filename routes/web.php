@@ -13,6 +13,8 @@ use App\Http\Controllers\{
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
+Route::view('/', 'Home');
+
 Route::resources(
     [
         'posts' => PostController::class,

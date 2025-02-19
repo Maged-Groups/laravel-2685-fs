@@ -18,7 +18,7 @@ class PostController extends Controller
 
         $ready_posts = PostResource::collection($posts);
 
-        return $ready_posts;
+        return view('posts.all');
 
     }
 

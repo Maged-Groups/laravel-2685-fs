@@ -16,9 +16,11 @@ class UserController extends Controller
     {
         $users = User::get();
 
-        // return $users ;
+        $users = UserResource::collection($users);
 
-        return UserResource::collection($users);
+        // return $users;
+        // return view('users.all' , ['users'=> $users]) ;
+        return view('users.all', compact('users'));
     }
 
     /**
