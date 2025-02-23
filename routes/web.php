@@ -13,7 +13,7 @@ use App\Http\Controllers\{
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'Home');
+Route::view('/', 'Home')->name('my-home-page');
 
 Route::resources(
     [

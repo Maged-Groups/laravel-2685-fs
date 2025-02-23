@@ -6,6 +6,8 @@ use App\Models\Post;
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
+use App\Http\Resources\PostStatusResource;
+use App\Models\PostStatus;
 
 class PostController extends Controller
 {
@@ -18,7 +20,7 @@ class PostController extends Controller
 
         $ready_posts = PostResource::collection($posts);
 
-        return view('posts.all');
+        return view('posts.index', compact('ready_posts'));
 
     }
 
@@ -27,7 +29,12 @@ class PostController extends Controller
      */
     public function create()
     {
-        //
+        $post_statuses = PostStatus::orderBy('type')->get();
+
+        $post_statuses = PostStatusResource::collection($post_statuses);
+
+
+        return view('posts.create', compact('post_statuses'));
     }
 
     /**
@@ -35,7 +42,7 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-        //
+       return $request;
     }
 
     /**
@@ -43,10 +50,44 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
+        // $qry SELECT * FROM posts WHERE id = 55;
+        // $res = self::$db->query($qry);
+        // $post = mysqli_fetch_object($res);
 
-        $post = Post::where('id', $post->id)->first();
+        // $post = Post::with('post_status')->first();
+        // $qry SELECT * FROM posts INNER JOIN post_statuses ON post_statuses.id = psots.post_status_id WHERE id = 55;
+        // $res = self::$db->query($qry);
+        // $post = mysqli_fetch_object($res);
 
-        return PostResource::make($post);
+
+        // return $post->post_status_id;
+
+        $post = $post->load('post_status');
+        // $qry_status = SELET * FROM post_statuses WHERE id = 6
+        // $res_status = self::$db->query($qry_status);
+        // $post_status = mysqli_fetch_object($res_status);
+
+        $post = PostResource::make($post);
+        return view('posts.show', compact('post'));
+
+
+    }
+
+    public function show_with_id($id)
+    {
+        // $qry SELECT * FROM posts WHERE id = 55;
+        // $res = self::$db->query($qry);
+        // $post = mysqli_fetch_object($res);
+
+        $post = Post::with('post_status')->first();
+        // $qry SELECT * FROM posts INNER JOIN post_statuses ON post_statuses.id = psots.post_status_id WHERE id = 55;
+        // $res = self::$db->query($qry);
+        // $post = mysqli_fetch_object($res);
+
+
+        return $post;
+
+
     }
 
     /**
