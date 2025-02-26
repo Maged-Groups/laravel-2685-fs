@@ -12,6 +12,16 @@ class Post extends Model
     /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory;
 
+
+    // protected $fillable = [
+    //     'title',
+    //     'body',
+    //     'user_id',
+    //     'post_status_id',
+    // ];
+
+    protected $guarded = [];
+
     // Relationships
 
     public function user(): BelongsTo

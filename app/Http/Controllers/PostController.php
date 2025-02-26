@@ -16,7 +16,8 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::get();
+        $posts = Post::withCount(['comments', 'reactions'])->with('user')->get();
+
 
         $ready_posts = PostResource::collection($posts);
 
@@ -42,7 +43,21 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
-       return $request;
+        $data = $request->validated(); // return array of ONLY validated fields
+
+        $data['user_id'] = 1;
+
+        // return $data;
+
+        $new_post = Post::create($data); // return an object instance from Post model
+
+        if ($new_post) {
+            return redirect()->route('posts.show', $new_post);
+        } else {
+        }
+
+        // return $data['title']; // Array
+        // return $data->title; // Object (instance from class)
     }
 
     /**
@@ -50,19 +65,9 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        // $qry SELECT * FROM posts WHERE id = 55;
-        // $res = self::$db->query($qry);
-        // $post = mysqli_fetch_object($res);
-
-        // $post = Post::with('post_status')->first();
-        // $qry SELECT * FROM posts INNER JOIN post_statuses ON post_statuses.id = psots.post_status_id WHERE id = 55;
-        // $res = self::$db->query($qry);
-        // $post = mysqli_fetch_object($res);
 
 
-        // return $post->post_status_id;
-
-        $post = $post->load('post_status');
+        $post = $post->load(['comments.user', 'reactions', 'post_status']);
         // $qry_status = SELET * FROM post_statuses WHERE id = 6
         // $res_status = self::$db->query($qry_status);
         // $post_status = mysqli_fetch_object($res_status);

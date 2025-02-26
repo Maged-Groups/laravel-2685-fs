@@ -22,7 +22,18 @@ class StorePostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            'title' => 'required|min:3|max:200',
+            'body' => ['required', 'min:20', 'max:200'],
+            'post_status_id' => 'required|exists:post_statuses,id',
+        ];
+    }
+
+    public function messages(): array
+    {
+        return [
+            'title.required' => 'لازم تكتب عنوان للبوست',
+            'title.min' => 'ما يقلش عن 3 حروف لو سمحت',
+            'post_status_id.exists' => "بطل تحايل مافيش النوع ده"
         ];
     }
 }
