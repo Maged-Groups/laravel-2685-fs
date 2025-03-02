@@ -15,6 +15,14 @@ use Illuminate\Support\Facades\Route;
 
 Route::view('/', 'Home')->name('my-home-page');
 
+
+Route::controller(PostController::class)->prefix('posts')->name('posts.')->group(function () {
+    Route::get('deleted', 'deleted_posts')->name('deleted');
+    Route::get('restore/{id}', 'restore_post')->name('restore');
+});
+
+
+
 Route::resources(
     [
         'posts' => PostController::class,

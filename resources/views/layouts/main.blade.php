@@ -8,7 +8,10 @@
     @vite('resources/css/app.css')
 </head>
 
-<body>
+<body class="h-screen flex flex-col">
+
+    @include('components.sessions')
+
     <header class="h-24 flex justify-center items-center bg-gray-900 text-white text-xls">
         <h1>App Title........</h1>
     </header>
@@ -24,13 +27,13 @@
     </nav>
 
 
-    <main>
+    <main class="flex-1">
         @yield('main-content')
     </main>
 
 
 
-    <footer class="bg-green-900 text-green-100 p-4 fixed bottom-0 w-full">
+    <footer class="bg-green-900 text-green-100 p-4 w-full">
         All rights reserved @2025 - the company
     </footer>
 </body>

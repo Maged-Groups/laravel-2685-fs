@@ -8,6 +8,8 @@ use App\Http\Requests\UpdatePostRequest;
 use App\Http\Resources\PostResource;
 use App\Http\Resources\PostStatusResource;
 use App\Models\PostStatus;
+use GuzzleHttp\Psr7\Header;
+use Illuminate\Http\Request;
 
 class PostController extends Controller
 {
@@ -30,10 +32,7 @@ class PostController extends Controller
      */
     public function create()
     {
-        $post_statuses = PostStatus::orderBy('type')->get();
-
-        $post_statuses = PostStatusResource::collection($post_statuses);
-
+        $post_statuses = get_post_statuses();
 
         return view('posts.create', compact('post_statuses'));
     }
@@ -43,6 +42,17 @@ class PostController extends Controller
      */
     public function store(StorePostRequest $request)
     {
+        // Another method to valdiate (NOT RECOMENDED)
+
+        // $validated = $request->validate(
+        //     [
+        //         'title' => 'required|min:3|max:200',
+        //         'body' => ['required', 'min:20', 'max:200'],
+        //         'post_status_id' => 'required|exists:post_statuses,id',
+        //     ]
+        // );
+
+        // return $validated;
         $data = $request->validated(); // return array of ONLY validated fields
 
         $data['user_id'] = 1;
@@ -52,8 +62,9 @@ class PostController extends Controller
         $new_post = Post::create($data); // return an object instance from Post model
 
         if ($new_post) {
-            return redirect()->route('posts.show', $new_post);
+            return redirect()->route('posts.show', $new_post)->with('success', 'Post Created Successfully');
         } else {
+            return redirect()->route('posts.create')->with('error', 'Cannot Creat the Post');
         }
 
         // return $data['title']; // Array
@@ -100,7 +111,10 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $post_statuses = get_post_statuses();
+
+
+        return view('posts.edit', compact('post', 'post_statuses'));
     }
 
     /**
@@ -108,7 +122,14 @@ class PostController extends Controller
      */
     public function update(UpdatePostRequest $request, Post $post)
     {
-        //
+        $data = $request->validated();
+
+        // Save updates
+
+        if ($post->update($data))
+            return redirect()->route('posts.show', $post)->with('success', 'Post updated successfully');
+
+        return redirect()->route('posts.edit', $post)->with('error', 'Something went wrong');
     }
 
     /**
@@ -116,6 +137,33 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->post_status_id = 7;
+        $post->save();
+
+        if ($post->delete())
+            return redirect()->route('posts.index')->with('success', 'Post deleted successfully');
+
+        return redirect()->route('posts.show', $post)->with('success', 'Cannot delete the post!');
+
+    }
+
+    public function deleted_posts()
+    {
+        $posts = Post::onlyTrashed()->get();
+
+        $ready_posts = PostResource::collection($posts);
+
+        return view('posts.index', compact('ready_posts'));
+    }
+
+    public function restore_post($id)
+    {
+        $post = Post::withTrashed()->find($id);
+
+        if ($post->restore())
+        return redirect()->route('posts.show', $post)->with('success', 'Post restored!');
+
+        return redirect()->route('posts', $post)->with('error', 'Cannot restore the post!');
+
     }
 }
