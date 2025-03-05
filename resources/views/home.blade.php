@@ -7,9 +7,48 @@
 
 @section('main-content')
 
-<div>
-    <seciont>Section 1 Title</seciont>
-    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Alias nobis voluptate ratione nulla aspernatur! Perferendis in laudantium dolorum exercitationem expedita assumenda excepturi explicabo quo soluta odit commodi tempore, obcaecati ducimus magnam nobis qui earum quae ratione! Suscipit ducimus exercitationem eius illo nisi, quaerat ab recusandae voluptatem pariatur maiores magni delectus voluptates eaque necessitatibus velit in fugit eligendi alias id nobis quos deserunt quam error quo? Libero quis ad eius ipsam cum quae laboriosam? Nulla unde voluptate, a maxime debitis tenetur dolorum harum qui sapiente? Sint maiores rem minima eveniet laudantium quam reiciendis doloremque, velit voluptates eos nobis tempora nemo aspernatur?</p>
-</div>
+    <div>
+
+        <x-buttons.action text='Save' style='text-white bg-green-700' />
+
+        <x-buttons.action text='Update' style='text-white bg-sky-700' />
+
+        <x-buttons.action text='Cancel' style='text-white bg-red-700' />
+
+        <x-buttons.action text='{{ $app_name }}' style='text-white bg-yellow-700' />
+
+        <x-buttons.action text='$app_name' style='text-white bg-blue-700' />
+
+        <x-buttons.action :text='$app_name' style='text-white bg-blue-700' />
+
+        <x-buttons.action />
+
+        <x-alert-component text='This is a text' />
+
+        <x-alert-component />
+
+
+        @foreach ($prices as $price)
+            <x-price-label :$price />
+        @endforeach
+
+
+        <x-card title='Maged Yaseen'>
+
+            <h3>Card Content</h3>
+
+            <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Explicabo necessitatibus aut placeat qui nemo
+                perspiciatis, error non ratione expedita voluptate quibusdam ex architecto possimus sit corporis
+                consequuntur maxime aspernatur quasi!</p>
+
+
+            <x-slot:footer>
+                <x-buttons.action text="Save" style="bg-green-600" />
+                <x-buttons.action text="Cancel" style="bg-red-600" />
+            </x-slot:footer>
+
+        </x-card>
+
+    </div>
 
 @endsection

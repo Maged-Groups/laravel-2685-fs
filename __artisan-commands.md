@@ -85,3 +85,7 @@ php artisan migrate:fresh --seed
 # run a migration with fresh data and seed
 
 php artisan migrate:refresh --seed
+
+
+# Create a Component
+php artisan make:component AlertComponent

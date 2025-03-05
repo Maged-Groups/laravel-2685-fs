@@ -13,7 +13,24 @@ use App\Http\Controllers\{
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Route;
 
-Route::view('/', 'Home')->name('my-home-page');
+// Route::view('/', 'Home')->name('my-home-page');
+
+Route::get('/', function () {
+
+    $app_name = 'My Application';
+
+    $prices = [
+        100000,
+        50000,
+        10000,
+        5000,
+        500,
+        50,
+        1000050,
+    ];
+
+    return view('home', compact('app_name', 'prices'));
+});
 
 
 Route::controller(PostController::class)->prefix('posts')->name('posts.')->group(function () {
